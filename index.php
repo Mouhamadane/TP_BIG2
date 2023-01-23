@@ -17,23 +17,13 @@ $etudiant = new Etudiant(
 // Connexion à la base de données
 // Ajouter un etudiant dans ma base de données
 // INSERT INTO `etudiant` (`Nom`, `Prenom`, `Email`, `Birthday`) VALUES (?,?,?,?)
-
-$query = $connect->prepare('INSERT INTO `etudiant` (`Nom`, `Prenom`, `Email`, `Birthday`) VALUES (?,?,?,?)');
-$result = $query->execute([
-   $etudiant->getName(),
-   $etudiant->getLastName(),
-   $etudiant->getEmail(),
-   $etudiant->getDateDeNaissance()
-]);
-
-if($result){
-   $message = "ajouté avec succés";
-} else{
-   $message = "une erreur";
-}
-
 // Home WOrk
 // SELECT count(*) as nbr FROM `etudiant` WHERE email = '".$etudiant->getEmail()."'
+$listQuery = $connect->query("SELECT * FROM `etudiant` WHERE 1");
+while($data = $listQuery->fetch(PDO::FETCH_ASSOC)){
+   $allStudent []= $data;
+}
+var_dump($allStudent);
 
 
 
@@ -57,8 +47,8 @@ if($result){
 
 // Recupérer la liste de tous les étudiants 
 // SELECT * FROM `etudiant` ORDER BY `Nom`
-// $listQuery = $connect->query("SELECT * FROM `etudiant` WHERE 1");
-// while($data = $listQuery->fetch(PDO::FETCH_ASSOC)){
+// 
+// 
 
 
 
